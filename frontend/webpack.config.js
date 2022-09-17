@@ -9,9 +9,10 @@ const { resolveTsAliases } = require("resolve-ts-aliases");
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === "dev";
 const tsConfigLocation = path.resolve(__dirname, "tsconfig.json");
+
 const AppDIR = path.join(__dirname, "app");
-const DirNode = path.join(__dirname, "node_modules");
-const SharedDIR = path.join(__dirname, "shared");
+const DirNode = path.join(__dirname, "../node_modules");
+const SharedDIR = path.join(__dirname, "../shared");
 const StylesDIR = path.join(__dirname, "styles");
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
     extensions: [".js", ".ts"],
   },
   output: {
-    filename: "bundle.js",
+    filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [

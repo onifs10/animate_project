@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@app": ["/*"],
+      "@assets": ["app/assets/*"],
+      "@utils": ["app/utils/*"],
+      "@components": ["app/components/*"],
+      "@styles": ["styles/*"]
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "app.js"],
+  "exclude": ["**/*.test.ts"]
+}
