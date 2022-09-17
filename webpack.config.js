@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const { resolveTsAliases } = require("resolve-ts-aliases");
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === "dev";
@@ -48,6 +49,7 @@ module.exports = {
     }),
   ],
   optimization: {
+    minimize: true,
     minimizer: [
       new ImageMinimizerPlugin({
         minimizer: {
@@ -64,6 +66,7 @@ module.exports = {
           },
         },
       }),
+      new TerserPlugin(),
     ],
   },
   module: {
@@ -92,6 +95,9 @@ module.exports = {
           },
           {
             loader: "postcss-loader",
+          },
+          {
+            loader: "sass-loader",
           },
         ],
       },
