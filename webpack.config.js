@@ -44,7 +44,7 @@ module.exports = {
     }),
 
     new ESLintPlugin({
-      extensions: ["ts", "js", "scss"],
+      extensions: ["ts", "js"],
     }),
   ],
   optimization: {
