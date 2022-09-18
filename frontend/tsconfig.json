@@ -5,7 +5,7 @@
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
-      "@app": ["/*"],
+      "@app": ["app/*"],
       "@assets": ["app/assets/*"],
       "@utils": ["app/utils/*"],
       "@components": ["app/components/*"],

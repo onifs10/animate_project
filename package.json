@@ -58,6 +58,8 @@
     "start": "concurrently --kill-others \"yarn backend:development\" \"yarn frontend:development\" "
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "@prismicio/client": "^6.7.1",
     "express": "^4.18.1",
     "pug": "^3.0.2"
   }
