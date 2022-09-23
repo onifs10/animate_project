@@ -1,6 +1,6 @@
 {
   "watch": ["*", "./views"],
-  "ext": ".ts,.js",
+  "ext": ".ts,.js,.pug,*",
   "ignore": [],
   "exec": "ts-node -r tsconfig-paths/register app.ts"
 }

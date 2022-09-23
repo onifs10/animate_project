@@ -25,9 +25,6 @@ app.use((req, res, next) => {
 
 app.get("/", async (req, res) => {
   // get home data from prismic
-  const data = await client.getSingle("home");
-
-  console.log(data);
   res.render("pages/home", {
     meta: {
       data: {
@@ -38,14 +35,13 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/about", (req, res) => {
+app.get("/about", async (req, res) => {
+  const data = await client.getSingle("about");
+  const meta = await client.getSingle("meta");
+  console.log(data.data.body);
   res.render("pages/about", {
-    meta: {
-      data: {
-        title: "Creative programming",
-        description: "Learning creative coding",
-      },
-    },
+    meta,
+    about: data,
   });
 });
 
