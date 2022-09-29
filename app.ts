@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import * as prismicH from "@prismicio/helpers";
+import erroHandler from "errorhandler";
 
 dotenv.config();
 
@@ -15,7 +16,8 @@ const app = express();
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-
+app.use(express.static(path.join(__dirname, "public")));
+app.use(erroHandler());
 app.use((req, res, next) => {
   res.locals.ctx = {
     prismicH,
@@ -38,7 +40,6 @@ app.get("/", async (req, res) => {
 app.get("/about", async (req, res) => {
   const data = await client.getSingle("about");
   const meta = await client.getSingle("meta");
-  console.log(data.data.body);
   res.render("pages/about", {
     meta,
     about: data,
@@ -56,14 +57,15 @@ app.get("/collections", (req, res) => {
   });
 });
 
-app.get("/details:id", (req, res) => {
-  res.render("pages/details", {
-    meta: {
-      data: {
-        title: "Creative programming",
-        description: "Learning creative coding",
-      },
-    },
+app.get("/details/:id", async (req, res) => {
+  const product = await client.getByUID("detail", req.params.id, {
+    fetchLinks: "collection.title",
+  });
+  const meta = await client.getSingle("meta");
+  // console.log(product, product.data.informations);
+  res.render("pages/detail", {
+    meta,
+    product,
   });
 });
 app.listen(PORT, () => {
