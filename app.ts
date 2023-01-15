@@ -7,6 +7,7 @@ import erroHandler from "errorhandler";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
+import { Client } from "@prismicio/client";
 
 dotenv.config();
 
@@ -16,6 +17,17 @@ const accessToken = process.env.PRISMIC_ACCESS_TOKEN as string;
 const client = createClient(repoName, accessToken);
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+const handleDefaults = async (api: Client) => {
+  const preloader = await api.getSingle("preloader");
+  const meta = await api.getSingle("meta");
+  const navigation = await api.getSingle("navigation");
+  return {
+    meta,
+    navigation,
+    preloader,
+  };
+};
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -35,60 +47,51 @@ app.use((req, res, next) => {
       },
     },
   };
+  res.locals.Link = prismicH.asLink;
   next();
 });
-
 app.get("/", async (req, res) => {
   // get home data from prismic
-  const preloader = await client.getSingle("preloader");
   const home = await client.getSingle("home");
-  const meta = await client.getSingle("meta");
   const collections = await client.getAllByType("collection");
+  const defaults = await handleDefaults(client);
   res.render("pages/home", {
-    meta,
     collections,
     home,
-    preloader,
+    ...defaults,
   });
 });
 
 app.get("/about", async (req, res) => {
   const about = await client.getSingle("about");
-  const preloader = await client.getSingle("preloader");
-  const meta = await client.getSingle("meta");
+  const defaults = await handleDefaults(client);
   res.render("pages/about", {
-    meta,
     about,
-    preloader,
+    ...defaults,
   });
 });
 
 app.get("/collections", async (req, res) => {
-  const preloader = await client.getSingle("preloader");
-  const meta = await client.getSingle("meta");
   const home = await client.getSingle("home");
   const collections = await client.getAllByType("collection", {
     fetchLinks: "detail.image",
   });
+  const defaults = await handleDefaults(client);
   res.render("pages/collections", {
-    meta,
     collections,
     home,
-    preloader,
+    ...defaults,
   });
 });
 
 app.get("/details/:id", async (req, res) => {
-  const preloader = await client.getSingle("preloader");
   const product = await client.getByUID("detail", req.params.id, {
     fetchLinks: "collection.title",
   });
-  const meta = await client.getSingle("meta");
-  // console.log(product, product.data.informations);
+  const defaults = await handleDefaults(client);
   res.render("pages/detail", {
-    meta,
     product,
-    preloader,
+    ...defaults,
   });
 });
 app.listen(PORT, () => {

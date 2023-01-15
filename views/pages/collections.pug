@@ -14,11 +14,11 @@ block content
                 .collections__gallery__wrapper
                     each collection  in collections
                         each product in collection.data.products
-                            a.collections__gallery__link(href=ctx.prismicH.asLink(product.products_product))
+                            a.collections__gallery__link(href=Link(product.products_product))
                                 figure.collections__gallery_media
                                     img.collections__gallery__image(alt=product.products_product.data.image.alt src=product.products_product.data.image.url)
             .collections__content
                 each collection  in collections
                     article.collections__article
                         h2.collections__article__title=`${collection.data.title} ${home.data.collection}`  
-                        p.collections__article__description=collection.data.description                        
+                        p.collections__article__description=collection.data.description
