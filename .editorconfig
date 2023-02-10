@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 [*.{md,pug}]
 trim_trailing_whitespace = false
 indent_style = 2
+
+[*.scss]
+quote_type=single

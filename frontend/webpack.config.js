@@ -13,10 +13,10 @@ const tsConfigLocation = path.resolve(__dirname, "tsconfig.json");
 const AppDIR = path.join(__dirname, "app");
 const DirNode = path.join(__dirname, "../node_modules");
 const SharedDIR = path.join(__dirname, "../shared");
-const StylesDIR = path.join(__dirname, "styles");
+const StylesDIR = path.join(__dirname, "../styles");
 
 module.exports = {
-  entry: [path.join(AppDIR, "index.ts"), path.join(StylesDIR, "styles.scss")],
+  entry: [path.join(AppDIR, "index.ts"), path.join(StylesDIR, "index.scss")],
   resolve: {
     alias: resolveTsAliases(tsConfigLocation),
     modules: [AppDIR, SharedDIR, StylesDIR, DirNode],
@@ -103,7 +103,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
+        test: /\.(jpe?g|png|gif|svg|fnt|webp)$/,
         loader: "file-loader",
         options: {
           outputPath: "assets",

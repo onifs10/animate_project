@@ -1,0 +1,8 @@
+body {
+  font-family: $font-suisse-bp;
+  @extend %description-16;
+  font-weight: 300;
+  // @include media('<phone') {
+  //   font-size: 120px;
+  // }
+}

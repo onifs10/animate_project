@@ -1,0 +1,22 @@
+@import './utils/variables.scss';
+@import './utils/mixins.scss';
+@import './utils/mixins.scss';
+@import './utils/vendors.scss';
+@import './utils/responsive.scss';
+
+@import './shared/descriptions.scss';
+@import './shared/titles.scss';
+
+@import './base/fonts.scss';
+@import './base/reset.scss';
+@import './base/base.scss';
+
+@import './pages/about/about';
+@import './pages/about/gallery';
+@import './pages/about/content';
+
+@import './pages/collections.scss';
+
+@import './pages/detail.scss';
+
+@import './pages/home.scss';
