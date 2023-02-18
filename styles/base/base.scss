@@ -6,3 +6,7 @@ body {
   //   font-size: 120px;
   // }
 }
+
+html {
+  font-size: calc(100vw / 1920 * 10);
+}
